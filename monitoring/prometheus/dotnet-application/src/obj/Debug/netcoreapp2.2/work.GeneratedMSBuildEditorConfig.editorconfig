@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = work
+build_property.ProjectDir = /home/sukki/docker-development-youtube-series/monitoring/prometheus/dotnet-application/src/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
