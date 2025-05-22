@@ -150,7 +150,7 @@ spec:
              !=
             0
           ) or (
-            kube_daemonset_updated_number_scheduled{job="kube-state-metrics"}
+            kube_daemonset_status_updated_number_scheduled{job="kube-state-metrics"}
              !=
             kube_daemonset_status_desired_number_scheduled{job="kube-state-metrics"}
           ) or (
@@ -159,7 +159,7 @@ spec:
             kube_daemonset_status_desired_number_scheduled{job="kube-state-metrics"}
           )
         ) and (
-          changes(kube_daemonset_updated_number_scheduled{job="kube-state-metrics"}[5m])
+          changes(kube_daemonset_status_updated_number_scheduled{job="kube-state-metrics"}[5m])
             ==
           0
         )
@@ -749,18 +749,6 @@ spec:
         summary: Target disappeared from Prometheus target discovery.
       expr: |
         absent(up{job="kube-controller-manager"} == 1)
-      for: 15m
-      labels:
-        severity: critical
-  - name: kubernetes-system-kube-proxy
-    rules:
-    - alert: KubeProxyDown
-      annotations:
-        description: KubeProxy has disappeared from Prometheus target discovery.
-        runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeproxydown
-        summary: Target disappeared from Prometheus target discovery.
-      expr: |
-        absent(up{job="kube-proxy"} == 1)
       for: 15m
       labels:
         severity: critical

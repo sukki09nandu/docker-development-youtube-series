@@ -65,23 +65,23 @@ module "vpc" {
 
   public_subnet_tags = {
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
-    "kubernetes.io/role/elb"                      = "1"
+    "kubernetes.io/role/elb"                    = "1"
   }
 
   private_subnet_tags = {
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
-    "kubernetes.io/role/internal-elb"             = "1"
+    "kubernetes.io/role/internal-elb"           = "1"
   }
 }
 
 module "eks" {
-  source       = "terraform-aws-modules/eks/aws"
-  cluster_name    = var.cluster_name
-  cluster_version = "1.17"
-  subnets         = module.vpc.private_subnets
-  version = "12.2.0"
-  cluster_create_timeout = "1h"
-  cluster_endpoint_private_access = true 
+  source                          = "terraform-aws-modules/eks/aws"
+  cluster_name                    = var.cluster_name
+  cluster_version                 = "1.17"
+  subnets                         = module.vpc.private_subnets
+  version                         = "12.2.0"
+  cluster_create_timeout          = "1h"
+  cluster_endpoint_private_access = true
 
   vpc_id = module.vpc.vpc_id
 
